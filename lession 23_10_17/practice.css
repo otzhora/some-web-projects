@@ -1,0 +1,59 @@
+.container{
+    font-family: sans-serif;
+    padding: 3rem;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 80%;
+    margin: 0.3rem auto;
+}
+
+body{
+
+    background-color: rgb(232, 232, 231);
+    
+}
+
+.card
+{
+    padding: 1.5rem;
+    width: 13rem;
+    height: 13rem;
+    box-shadow: 1px 1px 2px #aaa;
+    margin: 1rem auto;
+}
+
+@media (max-width:768px){
+    .container
+    {
+        padding: 0.4rem;
+        width: 100%;
+    }
+}
+@media (max-width:530px){
+    .card
+    {
+        width: 100%;
+    }
+}
+
+#y
+{
+    background-color: rgb(253, 255, 141);
+}
+
+#r
+{
+    background-color: rgb(255, 137, 172);
+}
+
+#o
+{
+    background-color: rgb(251, 208, 125);
+}
+
+#b
+{
+    background-color: rgb(128, 216, 253);
+}
