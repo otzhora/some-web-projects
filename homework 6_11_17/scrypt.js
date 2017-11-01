@@ -1,10 +1,13 @@
-let container = document.createElement("div")
-container.classList.add("container")
+let priority_container = document.createElement("div")
+priority_container.classList.add("container")
 
-function addCard(item){
-    let card = document.createElement("div")
-    card.classList.add("card")
+let other_container = document.createElement("div")
+other_container.classList.add("container")
 
+let global_container = document.createElement("div")
+global_container.classList.add("global_container")
+
+function addCard(item, card){
     if (item['image'])
     {
         let img_container = document.createElement("div")
@@ -31,12 +34,42 @@ function addCard(item){
     card.appendChild(action)
 
     card.classList.add(item['color'])
-    container.appendChild(card)
     console.log(card)
+    return card;
 }
+
+let has_priorities = false;
 
 for(let item in data)
 {
-    addCard(data[item])
+    let card = document.createElement("div")
+    card.classList.add("card")
+
+    card = addCard(data[item], card)
+
+    if(data[item]['group'] === 'priority')
+    {
+        priority_container.appendChild(card)
+        has_priorities = true;
+    }
+    else
+    {
+        other_container.appendChild(card)
+    }
 }
-document.body.appendChild(container)
+
+if(has_priorities)
+{
+    let sep1 = document.createElement('h1')
+    sep1.textContent = "Приорететные"
+    global_container.appendChild(sep1)
+    console.log("SAS1")
+    global_container.appendChild(priority_container)
+
+    let sep2 = document.createElement('h1')
+    sep2.textContent = "Обычные"
+    global_container.appendChild(sep2)
+    console.log("SAS2")
+    global_container.appendChild(other_container)
+    document.body.appendChild(global_container)
+}
