@@ -73,3 +73,6 @@ if(has_priorities)
     global_container.appendChild(other_container)
     document.body.appendChild(global_container)
 }
+else{
+    document.body.appendChild(other_container)
+}

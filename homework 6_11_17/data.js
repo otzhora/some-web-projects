@@ -1,25 +1,5 @@
 module.exports = [
-    {
-        'title': 'Колок',
-        'content': 'Затащить на пятюню',
-        'color': 'yellow',
-        'group': 'priority'
-    }, 
-
-    {
-        'title': 'Практика по фронтенду',
-        'content': 'Написать убийцу Google Keep',
-        'color': 'red',
-        'group': 'priority'
-    },
-
-    {
-        'title': 'Картинка',
-        'content': 'krasivo',
-        'color': 'orange',
-        'image': 'krasivo.jpg',
-        'group': 'priority'
-    },
+    
 
     {
         'title': 'Вынести мусор',
@@ -58,5 +38,26 @@ module.exports = [
         'content': 'помогите у меня нет сил придумывать эти тексты',
         'color': 'blue',
         'group': 'normal'
-    }
+    },
+    {
+        'title': 'Колок',
+        'content': 'Затащить на пятюню',
+        'color': 'yellow',
+        'group': 'priority'
+    }, 
+
+    {
+        'title': 'Практика по фронтенду',
+        'content': 'Написать убийцу Google Keep',
+        'color': 'red',
+        'group': 'priority'
+    },
+
+    {
+        'title': 'Картинка',
+        'content': 'krasivo',
+        'color': 'orange',
+        'image': 'krasivo.jpg',
+        'group': 'priority'
+    },
 ]
