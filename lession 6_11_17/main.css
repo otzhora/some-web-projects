@@ -1,0 +1,15 @@
+input
+{
+    margin: 5rem auto;
+    font-size: 3rem;
+    width: 32rem;
+    border: 3px solid lightgreen;
+    border-radius: 5px;
+    display: block;
+    position: center;
+}
+
+div
+{
+    width: 100%;
+}

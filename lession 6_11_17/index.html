@@ -1,0 +1,35 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <title> SSAS </title>
+        <link href="main.css" type="text/css" rel="stylesheet" />
+    </head>
+    <body>
+        <div>
+            <input id="card" placeholder="0000 0000 0000 0000"/>
+        </div>
+
+        <script>
+            let input_ = document.getElementById("card")
+            
+            
+            input_.addEventListener('keypress', function(event) {
+                if(event.which < 48 || event.which > 58)
+                {
+                    event.preventDefault()
+                }
+                
+                if(event.target.value.length > 19)
+                {
+                    event.preventDefault()
+                }
+
+                if((event.target.value.length) % 5 === 0 && event.target.value.length !== 20)
+                {
+                    event.target.value += " "
+                }
+                console.log(event.target.value.length + "  " +  event.which)
+            })
+        </script>
+    </body>
+</html>
