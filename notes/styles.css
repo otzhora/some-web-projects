@@ -81,7 +81,10 @@ body{
         top: auto;
         left: 5%;
         margin-left: 0%;
-        background-color: white;
+    }
+    .action
+    {
+        visibility: visible;
     }
 }
 
@@ -111,15 +114,15 @@ body{
     position: absolute;
     bottom: 5px;
     right: 5px;
-    visibility: visible;
+    visibility: hidden;
     background-image: url("images/settings.png");
     width: 32px;
     height: 32px;
 }
 
-/*.card:hover .action{
+.card:hover .action{
     visibility: visible;
-}*/
+}
 
 .img_container
 {
@@ -154,15 +157,15 @@ h1{
 
 .edit_window
 {
-    position: absolute;
+    position: fixed;
     top: 3rem;
     left: 40%;
     margin-left: -25%;
     width: 70%;
     height: 15rem;
     padding: 1.5rem;
-    background-color: rgb(255, 255, 255);
     border: .5px solid rgb(139, 139, 139);
+    background-color: white;
     border-radius: 3px;
     z-index: 5;
     display: flex;
@@ -177,8 +180,20 @@ h1{
     height: 32px;
     bottom: 1rem;
     left: 1rem;
+    margin: .8rem;
     background-color: rgb(255, 255, 255);
-    background-image: url("images/okey.png");
+}
+
+.close_cancer
+{
+    position: absolute;
+    font-size: 4rem;
+    width: 32px;
+    height: 32px;
+    bottom: 1rem;
+    left: 5rem;
+    margin: .8rem;
+    background-color: rgb(255, 255, 255);
 }
 
 input{
@@ -187,4 +202,14 @@ input{
     padding: .3rem;
     margin: .3rem;
     font-size: 2.3rem;
+}
+
+.delete
+{
+    position: absolute;
+    font-size: 1rem;
+    bottom: 1rem;
+    right: 1rem;
+    margin: .8rem;
+    background-color: red;
 }

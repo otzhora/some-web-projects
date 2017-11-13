@@ -8,77 +8,103 @@ other_container.classList.add("container")
 
 let no_prioties = true;
 
+function openEditWindow(edit_window)
+{
+    document.body.style.backgroundColor = "#878787"
+    document.body.appendChild(edit_window)
+}
+
 function closeWindow(e, window, card, save)
 {
-    if(event.target.classList.contains("close"))
+    if(event.target.classList.contains("close") || event.target.classList.contains("close_cancer") ||event.target.classList.contains("delete"))
     {
-        console.log(e.target.parentNode)
-        console.log(card.querySelector(".title"))
+
+        document.body.style.backgroundColor = "#e8e8e8"
         if(!save)
         {
-            document.body.removeChild(e.target.parentNode)
+            document.body.removeChild(window)
             return 0;
         }
 
         let inputs = window.querySelectorAll("input")
-        console.log(inputs)
 
         card.querySelector(".title").textContent = inputs[0].value
         card.querySelector(".text").textContent = inputs[1].value
+        document.body.style.backgroundColor = "#e8e8e8"
         document.body.removeChild(e.target.parentNode)
         return 0;
     }
 }
 
+function deleteNote(card, edit_window)
+{
+    if(other_container.contains(card))
+    {
+        other_container.removeChild(card)
+    } 
+    else if (priority_container.contains(card))
+    {
+        priority_container.remove(card)
+    }
+    closeWindow(0, edit_window, card, false)
+}
+
 function createEditWindow(card)
 {
-    console.log(card)
     let edit_window = document.createElement("div")
     edit_window.classList.add("edit_window")
 
     let okey_button = document.createElement("button")
     okey_button.classList.add("close")
+    okey_button.style.backgroundImage = "url('images/okey.png')"
     okey_button.addEventListener("click", function(){
         closeWindow(event, edit_window, card, true)
     })
 
+    let cancel_button = document.createElement("button")
+    cancel_button.classList.add("close_cancer")
+    cancel_button.style.backgroundImage = "url('images/cancer.png')"
+    cancel_button.addEventListener("click", function(){
+        closeWindow(event, edit_window, card, false)
+    })
+
+    let delete_button = document.createElement("button")
+    delete_button.classList.add("delete")
+    delete_button.textContent = "УДАЛИТЬ ЗАМЕТКУ"
+    delete_button.addEventListener("click", () => {
+        deleteNote(card, edit_window)
+    })
+
     let title = document.createElement("input")
-    console.log(card.querySelector(".title").textContent)
     if(card.querySelector(".title").textContent !== "")
         title.value = card.querySelector(".title").textContent
     title.placeholder = "edit title"
 
     let text_inp = document.createElement("input")
-    console.log(card.querySelector(".text").textContent)
     if(card.querySelector(".text").textContent !== "")
         text_inp.value = card.querySelector(".text").textContent
-    text_inp.placeholder = "edit title"
+    text_inp.placeholder = "edit text"
 
     edit_window.appendChild(title)
     edit_window.appendChild(text_inp)
     edit_window.appendChild(okey_button)
-
+    edit_window.appendChild(cancel_button)
+    edit_window.appendChild(delete_button)
     return edit_window
 }
 
 function switchToEdit(event)
 {
-    if(event.target.classList.contains('action'))
+    if(event.target.classList.contains('action') && !document.body.querySelector(".edit_window"))
     {
-        let edit_window = createEditWindow(event.target.parentNode)
-
-        document.body.appendChild(edit_window)
+        openEditWindow(createEditWindow(event.target.parentNode))
     }
 }
 
-function createEmptyCard(counter)
+function createEmptyCard()
 {
     let card = document.createElement("div")
     card.classList.add("card")
-
-    let img_container = document.createElement("img")
-    img_container.classList.add("img_container")
-    card.appendChild(img_container)
 
     let title_div = document.createElement("div")
     title_div.classList.add('title')
@@ -86,7 +112,6 @@ function createEmptyCard(counter)
 
     let text_div = document.createElement("div")
     text_div.classList.add("text")
-    text_div.textContent = counter
     card.appendChild(text_div)
 
     let edit_btn = document.createElement("div")
@@ -101,10 +126,14 @@ function createEmptyCard(counter)
 
 
 let add_btn = document.body.querySelector(".add")
-let counter = 1
+
 add_btn.addEventListener("click", function (){
-    other_container.appendChild(createEmptyCard(counter))
-    counter++
+    if(!document.body.querySelector(".edit_window"))
+    {
+        let new_card = createEmptyCard()
+        openEditWindow(createEditWindow(new_card))
+        other_container.appendChild(new_card)
+    }
 })
 
 global_container.appendChild(other_container)
