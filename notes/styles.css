@@ -113,8 +113,8 @@ body{
     right: 5px;
     visibility: visible;
     background-image: url("images/settings.png");
-    width: 35px;
-    height: 35px;
+    width: 32px;
+    height: 32px;
 }
 
 /*.card:hover .action{
@@ -186,5 +186,5 @@ input{
     border-radius: 3px;
     padding: .3rem;
     margin: .3rem;
-    font-size: 2rem;
+    font-size: 2.3rem;
 }

@@ -89,7 +89,7 @@ function createEmptyCard(counter)
     text_div.textContent = counter
     card.appendChild(text_div)
 
-    let edit_btn = document.createElement("button")
+    let edit_btn = document.createElement("div")
     edit_btn.classList.add("action")
     edit_btn.classList.add("yellow")
     card.appendChild(edit_btn)
