@@ -24,7 +24,9 @@ function closeWindow(e, window, card, save)
     if(event.target.classList.contains("close") || event.target.classList.contains("close_cancer") ||event.target.classList.contains("delete"))
     {
 
-        document.body.style.backgroundColor = "#e8e8e8"
+        if(document.body.querySelector(".blackout")){
+            document.body.removeChild(document.querySelector(".blackout"))
+        }
         if(!save)
         {
             document.body.removeChild(window)
@@ -58,6 +60,8 @@ function deleteNote(card, edit_window)
 
 function createEditWindow(card)
 {
+    // TODO: redisign thid
+
     let edit_window = document.createElement("div")
     edit_window.classList.add("edit_window")
 
