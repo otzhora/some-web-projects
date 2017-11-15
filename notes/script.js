@@ -10,8 +10,13 @@ let no_prioties = true;
 
 function openEditWindow(edit_window)
 {
-    document.body.style.backgroundColor = "#878787"
+    let backround_blackout = document.createElement("div")
+    backround_blackout.classList.add("blackout")
     document.body.appendChild(edit_window)
+
+    if(document.body.querySelector(".edit_window")){
+        document.body.appendChild(backround_blackout)
+    }
 }
 
 function closeWindow(e, window, card, save)
@@ -23,6 +28,9 @@ function closeWindow(e, window, card, save)
         if(!save)
         {
             document.body.removeChild(window)
+            if(document.body.querySelector(".blackout")){
+                document.body.removeChild(document.querySelector(".blackout"))
+            }
             return 0;
         }
 
@@ -30,7 +38,6 @@ function closeWindow(e, window, card, save)
 
         card.querySelector(".title").textContent = inputs[0].value
         card.querySelector(".text").textContent = inputs[1].value
-        document.body.style.backgroundColor = "#e8e8e8"
         document.body.removeChild(e.target.parentNode)
         return 0;
     }

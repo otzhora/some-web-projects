@@ -211,5 +211,16 @@ input{
     bottom: 1rem;
     right: 1rem;
     margin: .8rem;
-    background-color: red;
+    border-color: red;
+}
+
+.blackout
+{
+    position: fixed;
+    top: 0px;
+    width: 100%;
+    min-height: 100vh;
+    background-color: #878787;
+    z-index: 3;
+    opacity: .6;
 }
