@@ -21,7 +21,7 @@ function openEditWindow(edit_window)
 
 function closeWindow(e, window, card, save)
 {
-    if(event.target.classList.contains("close") || event.target.classList.contains("close_cancer") ||event.target.classList.contains("delete"))
+    if(e.target.classList.contains("close") || e.target.classList.contains("close_cancer") || e.target.classList.contains("delete"))
     {
 
         if(document.body.querySelector(".blackout")){
@@ -138,7 +138,7 @@ function saveImg(card, img_url)
     }
 }
 
-function deleteNote(card, edit_window)
+function deleteNote(event, card, edit_window)
 {
     if(other_container.contains(card))
     {
@@ -149,7 +149,7 @@ function deleteNote(card, edit_window)
         priority_container.removeChild(card)
     }
     updPriorities()
-    closeWindow(0, edit_window, card, false)
+    closeWindow(event, edit_window, card, false)
 }
 
 function createEditWindow(card)
@@ -162,22 +162,22 @@ function createEditWindow(card)
     let okey_button = document.createElement("button")
     okey_button.classList.add("close")
     okey_button.style.backgroundImage = "url('images/okey.png')"
-    okey_button.addEventListener("click", function(){
+    okey_button.addEventListener("click", function(event){
         closeWindow(event, edit_window, card, true)
     })
 
     let cancel_button = document.createElement("button")
     cancel_button.classList.add("close_cancer")
     cancel_button.style.backgroundImage = "url('images/cancer.png')"
-    cancel_button.addEventListener("click", function(){
+    cancel_button.addEventListener("click", function(event){
         closeWindow(event, edit_window, card, false)
     })
 
     let delete_button = document.createElement("button")
     delete_button.classList.add("delete")
     delete_button.textContent = "УДАЛИТЬ ЗАМЕТКУ"
-    delete_button.addEventListener("click", () => {
-        deleteNote(card, edit_window)
+    delete_button.addEventListener("click", (event) => {
+        deleteNote(event, card, edit_window)
     })
 
     let title = document.createElement("input")
