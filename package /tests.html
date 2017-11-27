@@ -1,0 +1,67 @@
+<script>
+    function same (a, b) {
+        var aProps = Object.getOwnPropertyNames(a)
+        var bProps = Object.getOwnPropertyNames(b)
+
+        if (aProps.length != bProps.length) {
+            return false
+        }
+
+        for (var i = 0; i < aProps.length; i++) {
+            var propName = aProps[i]
+            if (a[propName] !== b[propName]) {
+                return false
+            }
+        }
+        
+        return true
+    }
+
+    const url = 'http://localhost:8080/users/brotheroftux'
+
+    const headers = {
+        'Content-Type': 'application/json'
+    }
+    
+    const initialState = {
+        fullName: 'Daniel Kuznetsov',
+        country: 'England'
+    }
+    setTimeout(() => {
+        fetch(url, {
+        method: 'post',
+        body: JSON.stringify(initialState),
+        headers
+    })
+        .then(response => response.json())
+        .then(user => console.assert(same(user, initialState), user, initialState))
+    
+    }, 100);
+    
+    const fixedState = {
+        fullName: 'Some Name',
+        country: 'Russia'
+    }
+    setTimeout(() => {
+        fetch(url, {
+        method: 'put',
+        body: JSON.stringify(fixedState),
+        headers
+    })
+        .then(response => response.json())
+        .then(user => console.assert(same(user, fixedState), user, fixedState))
+
+    }, 200);
+    setTimeout(() => {
+        fetch(url, {
+        method: 'delete',
+    })
+    }, 300);
+    
+    setTimeout(() => {
+        fetch(url)
+        .then(response => response.json())
+        .then(user => console.assert(same(user, {}), user, {}))
+    }, 400);
+    
+</script>
