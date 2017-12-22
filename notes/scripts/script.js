@@ -9,7 +9,7 @@ other_container.classList.add("container")
 function saveImg(card, img_url)
 {
     let img = card.querySelector("img")
-    console.log(img)
+    
     if(img)
     {
         img.src = img_url
