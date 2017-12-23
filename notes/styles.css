@@ -75,13 +75,7 @@ body{
         margin: .3rem;
         max-width: 100%;
     }
-    .edit_window
-    {
-        width: 100%;
-        top: auto;
-        left: 5%;
-        margin-left: 0%;
-    }
+    
     .action
     {
         visibility: visible;
@@ -225,3 +219,14 @@ input{
     opacity: .6;
 }
 
+@media (max-width:768px){
+    .edit_window
+    {
+        max-width: 100%;
+        top: 1rem;
+        left: 0;
+        right: 0;
+        margin: .3rem;
+        width: auto;
+    }
+}

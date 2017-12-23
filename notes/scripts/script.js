@@ -74,6 +74,10 @@ function createEmptyCard()
     return card
 }
 
+function sendToServer(card)
+{
+    
+}
 
 let add_btn = document.body.querySelector(".add")
 
@@ -81,9 +85,8 @@ add_btn.addEventListener("click", function (){
     if(!document.body.querySelector(".edit_window"))
     {
         let new_card = createEmptyCard()
-        openEditWindow(createEditWindow(new_card))
-        
         other_container.appendChild(new_card)
+        openEditWindow(createEditWindow(new_card))
     }
 })
 
