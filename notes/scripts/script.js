@@ -91,3 +91,25 @@ add_btn.addEventListener("click", function (){
 })
 
 global_container.appendChild(other_container)
+
+let btn = document.createElement("button")
+btn.addEventListener("click", function(){
+
+    const xhr = new XMLHttpRequest()
+    xhr.open("POST", "./data.js")
+    xhr.setRequestHeader("Context-type", "text")
+
+    xhr.onreadystatechange = () => {
+        if(xhr.readyState != 4) return
+
+        if (xhr.status != 200) {
+            console.log(xhr.status + ': ' + xhr.statusText);
+        } else {
+            console.log(xhr.responseText);
+        }
+    }   
+
+    xhr.send("nudes")
+})
+
+document.body.appendChild(btn)
