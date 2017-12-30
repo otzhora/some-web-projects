@@ -2,61 +2,39 @@ module.exports = [
     {
         'title': 'Колок',
         'content': 'Затащить на пятюню',
-        'color': 'yellow',
-        'group': 'priority'
+        'prior': true
     }, 
 
     {
         'title': 'Практика по фронтенду',
         'content': 'Написать убийцу Google Keep',
-        'color': 'red',
-        'group': 'priority'
+        'prior': true
     },
 
     {
         'title': 'Картинка',
         'content': 'krasivo',
-        'color': 'orange',
-        'image': 'krasivo.jpg',
-        'group': 'priority'
+        'image': 'https://webgames.host/uploads/2017/01/days-of-thunder.jpg',
+        'prior': true
     },
 
     {
         'title': 'Вынести мусор',
         'content': 'Не забыть смешную шутку',
-        'image': 'pomoika.jpg',
-        'color': 'yellow',
-        'group': 'normal'
+        'image': 'https://i.ytimg.com/vi/l4uHdRE9O_I/maxresdefault.jpg',
+        'prior': false
     },
 
     {
         'title': 'Вынести мусор',
         'content': 'Не забыть смешную шутку',
-        'image': 'pomoika.jpg',
-        'color': 'orange',
-        'group': 'normal'
+        'image': 'https://cs6.pikabu.ru/images/previews_comm/2015-06_5/1434958436171545947.jpg',
+        'prior': false
     },
 
     {
         'title': 'Вынести мусор',
         'content': 'Не забыть смешную шутку',
-        'image': 'pomoika.jpg',
-        'color': 'red',
-        'group': 'normal'
-    },
-
-    {
-        'title': 'Вынести мусор',
-        'content': 'Не забыть смешную шутку',
-        'image': 'pomoika.jpg',
-        'color': 'blue',
-        'group': 'normal'
-    }, 
-
-    {
-        'title': 'Найти идеи',
-        'content': 'помогите у меня нет сил придумывать эти тексты',
-        'color': 'blue',
-        'group': 'normal'
+        'prior': false
     }
 ]

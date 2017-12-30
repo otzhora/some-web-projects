@@ -6,39 +6,7 @@ priority_container.classList.add("container")
 let other_container = document.createElement("div")
 other_container.classList.add("container")
 
-function saveImg(card, img_url)
-{
-    let img = card.querySelector("img")
-    
-    if(img)
-    {
-        img.src = img_url
-    }
-    else if(img_url){
-        
-        let title_ = card.querySelector(".title")
-        let text_  = card.querySelector(".text")
-        let btn    = card.querySelector(".action")
-
-        card.removeChild(title_)
-        card.removeChild(text_)
-        card.removeChild(btn)
-
-        let img_container = document.createElement("div")
-        img_container.classList.add("img_container")
-        let img = document.createElement("img")
-        img.src = img_url
-        img_container.appendChild(img)
-
-        card.appendChild(img_container)
-        card.appendChild(title_)
-        card.appendChild(text_)
-        card.appendChild(btn)
-    }
-}
-
-function deleteNote(event, card, edit_window)
-{
+function deleteNote(event, card, edit_window) {
     if(other_container.contains(card))
     {
         other_container.removeChild(card)
@@ -51,8 +19,15 @@ function deleteNote(event, card, edit_window)
     closeEditWindow(event, edit_window, card, false)
 }
 
-function createEmptyCard()
+function switchToEdit(event)
 {
+    if(event.target.classList.contains('action') && !document.body.querySelector(".edit_window"))
+    {
+        openEditWindow(createEditWindow(event.target.parentNode))
+    }
+}
+
+function createEmptyCard() {
     let card = document.createElement("div")
     card.classList.add("card")
 
@@ -74,14 +49,29 @@ function createEmptyCard()
     return card
 }
 
-function sendToServer(card)
-{
+function sendToServer(method, body, cb) {
+    const xhr = new XMLHttpRequest()
+    xhr.open(method, "./data.js")
+
+    xhr.setRequestHeader("Context-type", "text")
+    
+    xhr.onreadystatechange = () => {
+        if(xhr.readyState != 4) return
+
+        if (xhr.status != 200) {
+            console.log(xhr.status + ': ' + xhr.statusText);
+        } else {
+            cb(xhr.responseText);
+        }
+    }
+    
+    xhr.send(body)
     
 }
 
 let add_btn = document.body.querySelector(".add")
 
-add_btn.addEventListener("click", function (){
+add_btn.addEventListener("click", function () {
     if(!document.body.querySelector(".edit_window"))
     {
         let new_card = createEmptyCard()
@@ -92,24 +82,4 @@ add_btn.addEventListener("click", function (){
 
 global_container.appendChild(other_container)
 
-let btn = document.createElement("button")
-btn.addEventListener("click", function(){
-
-    const xhr = new XMLHttpRequest()
-    xhr.open("POST", "./data.js")
-    xhr.setRequestHeader("Context-type", "text")
-
-    xhr.onreadystatechange = () => {
-        if(xhr.readyState != 4) return
-
-        if (xhr.status != 200) {
-            console.log(xhr.status + ': ' + xhr.statusText);
-        } else {
-            console.log(xhr.responseText);
-        }
-    }   
-
-    xhr.send("nudes")
-})
-
-document.body.appendChild(btn)
+init()

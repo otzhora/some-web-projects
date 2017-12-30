@@ -213,7 +213,7 @@ input{
     position: fixed;
     top: 0px;
     width: 100%;
-    min-height: 100vh;
+    min-height: 140vh;
     background-color: #878787;
     z-index: 3;
     opacity: .6;

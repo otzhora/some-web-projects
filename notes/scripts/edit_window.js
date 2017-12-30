@@ -1,10 +1,4 @@
-function switchToEdit(event)
-{
-    if(event.target.classList.contains('action') && !document.body.querySelector(".edit_window"))
-    {
-        openEditWindow(createEditWindow(event.target.parentNode))
-    }
-}
+
 
 function openEditWindow(edit_window)
 {
@@ -84,6 +78,36 @@ function createEditWindow(card)
     edit_window.appendChild(cancel_button)
     edit_window.appendChild(delete_button)
     return edit_window
+}
+
+function saveImg(card, img_url) {
+    let img = card.querySelector("img")
+    
+    if(img)
+    {
+        img.src = img_url
+    }
+    else if(img_url){
+        
+        let title_ = card.querySelector(".title")
+        let text_  = card.querySelector(".text")
+        let btn    = card.querySelector(".action")
+
+        card.removeChild(title_)
+        card.removeChild(text_)
+        card.removeChild(btn)
+
+        let img_container = document.createElement("div")
+        img_container.classList.add("img_container")
+        let img = document.createElement("img")
+        img.src = img_url
+        img_container.appendChild(img)
+
+        card.appendChild(img_container)
+        card.appendChild(title_)
+        card.appendChild(text_)
+        card.appendChild(btn)
+    }
 }
 
 function closeEditWindow(e, window, card, save)

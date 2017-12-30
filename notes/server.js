@@ -17,9 +17,11 @@ const binary_types = ['jpeg', 'jpg', 'png']
 
 function readText (pathname) {
     let htmlData = fs.readFileSync(pathname, 'utf8')
-    return htmlData
-}
+    let noteData = JSON.stringify(data)
 
+    let template = `var data = ${noteData}`
+    return htmlData.replace(/{\s*data\s*}/, template)
+}
 function getRequestBody (request) {
     let body = ''
     
@@ -43,9 +45,9 @@ const server = http.createServer(async (request, response) => {
         console.log('Request body:', body)
 
         response.end(JSON.stringify({
-            response: ['getrekt', 'jej', 'lal']
+            response: 1
         }))
-    } else if (request.method === "PUT"){
+    } else if (request.method === "PUT") {
         console.log('===')
         console.log('Handling PUT request.')
 
@@ -53,9 +55,9 @@ const server = http.createServer(async (request, response) => {
         console.log('Request body:', body)
 
         response.end(JSON.stringify({
-            response: ['getrekt', 'jej', 'lal']
+            response: 2
         }))
-    }else{
+    } else {
         let pathname = url.parse(request.url).pathname
         
         pathname = pathname.slice(1)
