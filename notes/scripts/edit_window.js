@@ -133,7 +133,41 @@ function closeEditWindow(e, window, card, save)
         card.querySelector(".text").textContent = inputs[1].value
         saveImg(card, inputs[2].value)
         changePriorities(card, inputs[3].checked)
+        updData(cardToJson(card))
         document.body.removeChild(e.target.parentNode)
         return 0;
     }
 }
+
+function cardToJson(card){
+    let json = {}
+    json['id'] = parseInt(card.classList[2])
+    json['title'] = card.querySelector('.title').textContent
+    json['content'] = card.querySelector('.text').textContent
+    if(card.querySelector('img'))
+        json['image'] = card.querySelector('img').src
+
+    json['prior'] = priority_container.contains(card)
+    return json
+}
+
+function updData(json){
+    console.log("SSSSSS ", json['id'])
+    for(let item of data){
+        console.log(item['id'])
+        if(item['id'] === json['id']){
+            item['title'] = json['title']
+            item['content'] = json['content']
+            if(json['image'])
+                item['image'] = json['image']
+            else delete item['image']
+            item['prior'] = json['prior']
+            sendToServer("POST", JSON.stringify(json), console.log)
+            return 0
+        }
+    }
+    data.push(json)
+    sendToServer("PUT", JSON.stringify(json), console.log)
+    console.log(data)
+}
+

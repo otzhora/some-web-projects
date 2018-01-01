@@ -46,7 +46,18 @@ function createEmptyCard() {
 
     card.classList.add("yellow")
     card.addEventListener("click", switchToEdit)
+    if(card.classList.length === 2)
+        card.classList.add(getCardId())
     return card
+}
+
+function getCardId(){
+    let id = 0
+    for(let card of data){
+        id = Math.max(card['id'], id)
+        console.log(card['id'])
+    }
+    return ++id;
 }
 
 function sendToServer(method, body, cb) {
