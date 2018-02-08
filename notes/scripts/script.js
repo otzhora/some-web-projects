@@ -16,7 +16,23 @@ function deleteNote(event, card, edit_window) {
         priority_container.removeChild(card)
     }
     updPriorities()
+    deleteData(card)
     closeEditWindow(event, edit_window, card, false)
+}
+
+function deleteData(card){
+    json = cardToJson(card)
+
+    let id = json['id']
+    let i = 0;
+    for (; i < data.length; i++) {
+        if(data[i].id === id)
+            break;
+    }
+    if (i < data.length) {
+        data.splice(i, 1)
+    }
+    sendToServer("DELETE", id, console.log)
 }
 
 function switchToEdit(event)

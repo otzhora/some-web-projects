@@ -22,6 +22,7 @@ function readText (pathname) {
     let template = `var data = ${noteData}`
     return htmlData.replace(/{\s*data\s*}/, template)
 }
+
 function getRequestBody (request) {
     let body = ''
     
@@ -36,6 +37,20 @@ function getRequestBody (request) {
     })
 }
 
+function updData(){
+    let text = 'module.exports = ['
+    for(let i = 0; i < data.length; i++){
+        text += JSON.stringify(data[i])
+        if(i < data.length - 1)
+        text += ','
+    }
+    text += ']'
+    fs.writeFile("data.js", text, (err) => {
+        if(err) throw err
+        else console.log("succ")
+    })
+}
+
 const server = http.createServer(async (request, response) => {
     if (request.method === 'POST') {
         console.log('===')
@@ -43,6 +58,16 @@ const server = http.createServer(async (request, response) => {
 
         let body = await getRequestBody(request)
         console.log('Request body:', body)
+        
+        let note = JSON.parse(body)
+
+        for(let i = 0; i < data.length; i++) {
+            if(data[i].id === note.id){
+                data[i] = note
+            }
+        }
+
+        updData()
 
         response.end(JSON.stringify({
             response: 1
@@ -54,8 +79,32 @@ const server = http.createServer(async (request, response) => {
         let body = await getRequestBody(request)
         console.log('Request body:', body)
 
+        data.push(JSON.parse(body))
+        updData()
+
         response.end(JSON.stringify({
             response: 2
+        }))
+    } else if (request.method === "DELETE"){
+        console.log('===')
+        console.log('Handling DELETE request.')
+
+        let body = await getRequestBody(request)
+        console.log('Request body:', body)
+
+        let id = parseInt(body)
+        let i = 0;
+        for(; i < data.length; i++){
+            if(data[i].id === id)
+                break;
+        }
+        if(i < data.length){
+            data.splice(i, 1)
+        }
+        updData()
+
+        response.end(JSON.stringify({
+            response: 3
         }))
     } else {
         let pathname = url.parse(request.url).pathname
