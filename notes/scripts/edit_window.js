@@ -5,16 +5,11 @@ function openEditWindow(edit_window)
     let backround_blackout = document.createElement("div")
     backround_blackout.classList.add("blackout")
     document.body.appendChild(edit_window)
-
-    if(document.body.querySelector(".edit_window")){
-        document.body.appendChild(backround_blackout)
-    }
+    document.body.appendChild(backround_blackout)
 }
 
 function createEditWindow(card)
 {
-    // TODO: redisign thid
-
     let edit_window = document.createElement("div")
     edit_window.classList.add("edit_window")
 
@@ -52,10 +47,13 @@ function createEditWindow(card)
     let img_inp = document.createElement("input")
     if(card.querySelector("img"))
     {
-        console.log(card.querySelector("img"))
         img_inp.value = card.querySelector("img").src;
     }   
     img_inp.placeholder = "enter img address"
+
+
+    let checkbox_container = document.createElement("div")
+    checkbox_container.classList.add("checkbox_container")
 
     let priority_inp = document.createElement("input")
     priority_inp.type = "checkbox"
@@ -64,16 +62,17 @@ function createEditWindow(card)
     {
         priority_inp.checked = true;
     }
+    checkbox_container.appendChild(priority_inp)
 
     let checkbox_label = document.createElement("label")
     checkbox_label.htmlFor = "make_priority"
     checkbox_label.textContent = "make note priority"
+    checkbox_container.appendChild(checkbox_label)
 
     edit_window.appendChild(title)
     edit_window.appendChild(text_inp)
     edit_window.appendChild(img_inp)
-    edit_window.appendChild(priority_inp)
-    edit_window.appendChild(checkbox_label)
+    edit_window.appendChild(checkbox_container)
     edit_window.appendChild(okey_button)
     edit_window.appendChild(cancel_button)
     edit_window.appendChild(delete_button)
@@ -83,30 +82,24 @@ function createEditWindow(card)
 function saveImg(card, img_url) {
     let img = card.querySelector("img")
     
-    if(img)
+    if(img && !img_url)
+    {
+        card.removeChild(card.querySelector(".img_container"))
+    }
+    else if(img)
     {
         img.src = img_url
     }
     else if(img_url){
-        
-        let title_ = card.querySelector(".title")
-        let text_  = card.querySelector(".text")
-        let btn    = card.querySelector(".action")
-
-        card.removeChild(title_)
-        card.removeChild(text_)
-        card.removeChild(btn)
-
         let img_container = document.createElement("div")
         img_container.classList.add("img_container")
         let img = document.createElement("img")
         img.src = img_url
         img_container.appendChild(img)
 
-        card.appendChild(img_container)
-        card.appendChild(title_)
-        card.appendChild(text_)
-        card.appendChild(btn)
+        let title_ = card.querySelector(".title")
+
+        card.insertBefore(img_container, title_)
     }
 }
 
@@ -152,9 +145,7 @@ function cardToJson(card){
 }
 
 function updData(json){
-    console.log("SSSSSS ", json['id'])
     for(let item of data){
-        console.log(item['id'])
         if(item['id'] === json['id']){
             item['title'] = json['title']
             item['content'] = json['content']
@@ -168,6 +159,5 @@ function updData(json){
     }
     data.push(json)
     sendToServer("PUT", JSON.stringify(json), console.log)
-    console.log(data)
 }
 

@@ -3,7 +3,6 @@ let no_normal = false;
 
 function changePriorities(card, checked)
 {
-    console.log(no_prioties, checked, no_normal)
     if(no_prioties && checked && !no_normal)
     {
         no_prioties = false
@@ -79,9 +78,6 @@ function changePriorities(card, checked)
         }
     }
     updPriorities();
-    //console.log(checked)
-    //console.log(priority_container)
-    //console.log(other_container)
 }
 
 function updPriorities()

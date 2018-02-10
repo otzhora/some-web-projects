@@ -15,6 +15,5 @@ function jsonToCard(json) {
         card.classList.remove(card.classList[2])
     }
     card.classList.add(json['id'])
-    console.log(json)
     return card
 }

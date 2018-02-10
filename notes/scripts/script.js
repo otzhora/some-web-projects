@@ -71,7 +71,6 @@ function getCardId(){
     let id = 0
     for(let card of data){
         id = Math.max(card['id'], id)
-        console.log(card['id'])
     }
     return ++id;
 }

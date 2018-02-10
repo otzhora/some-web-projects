@@ -70,7 +70,7 @@ const server = http.createServer(async (request, response) => {
         updData()
 
         response.end(JSON.stringify({
-            response: 1
+            response: "OK"
         }))
     } else if (request.method === "PUT") {
         console.log('===')
@@ -83,7 +83,7 @@ const server = http.createServer(async (request, response) => {
         updData()
 
         response.end(JSON.stringify({
-            response: 2
+            response: "OK"
         }))
     } else if (request.method === "DELETE"){
         console.log('===')
@@ -104,7 +104,7 @@ const server = http.createServer(async (request, response) => {
         updData()
 
         response.end(JSON.stringify({
-            response: 3
+            response: "OK"
         }))
     } else {
         let pathname = url.parse(request.url).pathname
