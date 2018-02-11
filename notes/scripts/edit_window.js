@@ -63,6 +63,7 @@ function createEditWindow(card)
         priority_inp.checked = true;
     }
     checkbox_container.appendChild(priority_inp)
+       
 
     let checkbox_label = document.createElement("label")
     checkbox_label.htmlFor = "make_priority"
@@ -107,7 +108,6 @@ function closeEditWindow(e, window, card, save)
 {
     if(e.target.classList.contains("close") || e.target.classList.contains("close_cancer") || e.target.classList.contains("delete"))
     {
-
         if(document.body.querySelector(".blackout")){
             document.body.removeChild(document.querySelector(".blackout"))
         }
@@ -125,7 +125,12 @@ function closeEditWindow(e, window, card, save)
         card.querySelector(".title").textContent = inputs[0].value
         card.querySelector(".text").textContent = inputs[1].value
         saveImg(card, inputs[2].value)
-        changePriorities(card, inputs[3].checked)
+        
+        if(priority_container.contains(card) !== inputs[3].checked)
+        {
+            
+            changePriorities(card, inputs[3].checked)
+        }
         updData(cardToJson(card))
         document.body.removeChild(e.target.parentNode)
         return 0;

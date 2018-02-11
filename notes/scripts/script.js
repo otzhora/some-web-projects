@@ -1,10 +1,9 @@
 let global_container = document.querySelector(".global_container")
+let prior_title = document.querySelector("h1")
+let priority_container = document.querySelector(".container")
+let normal_title = document.querySelectorAll("h1")[1]
+let other_container = document.querySelectorAll(".container")[1]
 
-let priority_container = document.createElement("div")
-priority_container.classList.add("container")
-
-let other_container = document.createElement("div")
-other_container.classList.add("container")
 
 function deleteNote(event, card, edit_window) {
     if(other_container.contains(card))
@@ -106,6 +105,6 @@ add_btn.addEventListener("click", function () {
     }
 })
 
-global_container.appendChild(other_container)
+//global_container.appendChild(other_container)
 
 init()

@@ -1,9 +1,12 @@
 function init() {
     for(let json of data){
         let card = jsonToCard(json)
-        other_container.appendChild(card)
-        changePriorities(card, json['prior'])
+        if(json.prior) {
+            priority_container.appendChild(card)
+        }
+        else other_container.appendChild(card)
     }
+    updPriorities()
 }
 
 function jsonToCard(json) {
