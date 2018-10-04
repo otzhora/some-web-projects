@@ -12,7 +12,7 @@
             @click="todo.isCompleted=!todo.isCompleted"
             @dblclick="modify(i)"
             @keyup.enter="mod = -1">  
-            {{ i + 1}}. {{ todo.text }} </div>
+            {{ i + 1 }}. {{ todo.text }} </div>
             <button @click='remove(i)'> Удалить </button>
         </div>
 

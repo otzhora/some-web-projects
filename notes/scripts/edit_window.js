@@ -48,7 +48,7 @@ function createEditWindow(card)
     if(card.querySelector("img"))
     {
         img_inp.value = card.querySelector("img").src;
-    }   
+    }
     img_inp.placeholder = "enter img address"
 
 
@@ -63,7 +63,7 @@ function createEditWindow(card)
         priority_inp.checked = true;
     }
     checkbox_container.appendChild(priority_inp)
-       
+
 
     let checkbox_label = document.createElement("label")
     checkbox_label.htmlFor = "make_priority"
@@ -82,7 +82,7 @@ function createEditWindow(card)
 
 function saveImg(card, img_url) {
     let img = card.querySelector("img")
-    
+
     if(img && !img_url)
     {
         card.removeChild(card.querySelector(".img_container"))
@@ -106,7 +106,9 @@ function saveImg(card, img_url) {
 
 function closeEditWindow(e, window, card, save)
 {
-    if(e.target.classList.contains("close") || e.target.classList.contains("close_cancer") || e.target.classList.contains("delete"))
+    if(e.target.classList.contains("close") ||
+    e.target.classList.contains("close_cancer") ||
+    e.target.classList.contains("delete"))
     {
         if(document.body.querySelector(".blackout")){
             document.body.removeChild(document.querySelector(".blackout"))
@@ -125,10 +127,10 @@ function closeEditWindow(e, window, card, save)
         card.querySelector(".title").textContent = inputs[0].value
         card.querySelector(".text").textContent = inputs[1].value
         saveImg(card, inputs[2].value)
-        
+
         if(priority_container.contains(card) !== inputs[3].checked)
         {
-            
+
             changePriorities(card, inputs[3].checked)
         }
         updData(cardToJson(card))
@@ -165,4 +167,3 @@ function updData(json){
     data.push(json)
     sendToServer("PUT", JSON.stringify(json), console.log)
 }
-
